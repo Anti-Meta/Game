@@ -3,10 +3,8 @@ package com.skreaper.game.ormlite.entity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.util.Date;
-
 @DatabaseTable
-public class Player implements Identifiable {
+public class NPC implements Identifiable {
 
     @DatabaseField(generatedId = true)
     private int id;
@@ -22,12 +20,6 @@ public class Player implements Identifiable {
 
     @DatabaseField
     private Integer totalSkillpoints;
-
-    @DatabaseField
-    private Integer gold;
-
-    @DatabaseField
-    private Integer diamond;
 
     @DatabaseField(foreign = true)
     private Stats stats;
@@ -71,22 +63,6 @@ public class Player implements Identifiable {
 
     public void setTotalSkillpoints(Integer totalSkillpoints) {
         this.totalSkillpoints = totalSkillpoints;
-    }
-
-    public Integer getGold() {
-        return gold;
-    }
-
-    public void setGold(Integer gold) {
-        this.gold = gold;
-    }
-
-    public Integer getDiamond() {
-        return diamond;
-    }
-
-    public void setDiamond(Integer diamond) {
-        this.diamond = diamond;
     }
 
     public Stats getStats() {

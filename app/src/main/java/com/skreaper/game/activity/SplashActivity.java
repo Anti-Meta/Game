@@ -5,7 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.skreaper.game.ormlite.DatabaseHelper;
+import com.skreaper.game.ormlite.entity.Enemy;
+import com.skreaper.game.ormlite.entity.Equipment;
+import com.skreaper.game.ormlite.entity.EquipmentType;
+import com.skreaper.game.ormlite.entity.NPC;
 import com.skreaper.game.ormlite.entity.Player;
+import com.skreaper.game.ormlite.entity.Stats;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,11 @@ public class SplashActivity extends AppCompatActivity {
         //TODO add all the needed entities
         List<Class> classes = new ArrayList<>();
         classes.add(Player.class);
+        classes.add(Equipment.class);
+        classes.add(EquipmentType.class);
+        classes.add(Stats.class);
+        classes.add(NPC.class);
+        classes.add(Enemy.class);
         return classes;
     }
 }
