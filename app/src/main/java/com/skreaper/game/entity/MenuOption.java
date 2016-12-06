@@ -4,7 +4,6 @@ public class MenuOption {
     private int orderNumber;
     private String mainText;
     private Integer activity;
-    private int icon;
     private Class optionClass;
 
     public int getOrderNumber() {
@@ -29,14 +28,6 @@ public class MenuOption {
 
     public void setActivity(Integer activity) {
         this.activity = activity;
-    }
-
-    public int getIcon() {
-        return icon;
-    }
-
-    public void setIcon(int icon) {
-        this.icon = icon;
     }
 
     public Class getOptionClass() {

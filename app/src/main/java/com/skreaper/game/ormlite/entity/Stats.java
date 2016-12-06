@@ -7,7 +7,10 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Stats implements Identifiable {
 
     @DatabaseField(generatedId = true)
-    int id;
+    private int id;
+
+    @DatabaseField
+    private String statsProfileName;
 
     //PRIME STATS
     @DatabaseField
@@ -71,6 +74,14 @@ public class Stats implements Identifiable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getStatsProfileName() {
+        return statsProfileName;
+    }
+
+    public void setStatsProfileName(String statsProfileName) {
+        this.statsProfileName = statsProfileName;
     }
 
     public Integer getVitality() {

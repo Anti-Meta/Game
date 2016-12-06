@@ -45,7 +45,6 @@ public class MainMenuAdapter extends BaseAdapter {
 
     public static class ViewDisplayValue {
         public TextView mainText;
-        public ImageView icon;
     }
 
     //TODO
@@ -59,7 +58,6 @@ public class MainMenuAdapter extends BaseAdapter {
 
             value = new ViewDisplayValue();
             value.mainText = (TextView) view.findViewById(R.id.textView);
-            value.icon = (ImageView) view.findViewById(R.id.logo);
 
             view.setTag(value);
         }
@@ -74,9 +72,6 @@ public class MainMenuAdapter extends BaseAdapter {
             MenuOption selectedMenuOption = menuOptionList.get(position);
 
             value.mainText.setText(selectedMenuOption.getMainText());
-            if(selectedMenuOption.getIcon() != 0){
-                value.icon.setImageResource(selectedMenuOption.getIcon());
-            }
         }
 
         view.setOnClickListener(new OnItemClickListener(position));

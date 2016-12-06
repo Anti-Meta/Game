@@ -70,6 +70,18 @@ public class DatabaseManager <T extends Identifiable> {
         return item;
     }
 
+    public T findFirst(){
+        T item = null;
+        try {
+            QueryBuilder<T, ?> builder = dao.queryBuilder();
+            item = dao.queryForFirst(builder.prepare());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return item;
+    }
+
+
     public List<T>  findMultiple(Collection<Integer> ids){
         List<T> resultList = new ArrayList<>();
         for(Integer id: ids){
@@ -204,6 +216,14 @@ public class DatabaseManager <T extends Identifiable> {
     public void deleteMultiple(Collection<T> items){
         for(T item : items){
             delete(item);
+        }
+    }
+
+    public void refresh(T entity){
+        try {
+            dao.refresh(entity);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
