@@ -1,1 +1,12 @@
-hello ghuys im the Conciërge# Game
+# Game
+### Still needs name :+1:
+
+@sherkd hello ghuys im the Conciërge# Game
+
+TODO List:
+- [x] Create database entity's
+- [ ] Create XP system
+- [ ] Create skillpoint system
+- [ ] Create equipment system
+- [ ] Create shop system where you can buy with gold or diamonds
+- [ ] Add more stuff..
