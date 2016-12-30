@@ -8,7 +8,7 @@ import com.skreaper.game.ormlite.entity.Enemy;
  */
 public class EnemyUtil {
 
-    public Enemy getNewEnemy(Integer currentLevel){
+    public static Enemy getNewEnemy(Integer currentLevel){
         Enemy newEnemy = new Enemy();
         Float randomFloat = RandomValues.getRandomFloat();
         if(randomFloat >= 0.65f)
@@ -19,8 +19,8 @@ public class EnemyUtil {
             currentLevel += 2;
         }
         newEnemy.setLevel(currentLevel);
-        newEnemy.setName(RandomValues.getName());
-        newEnemy.setStats(RandomValues.getRandomEnemyStats());
+        newEnemy.setStats(RandomValues.getRandomEnemyStats(currentLevel));
+        newEnemy.setName(newEnemy.getStats().getStatsProfileName() + " " + currentLevel+ ": " +  RandomValues.getName());
         return newEnemy;
     }
 }

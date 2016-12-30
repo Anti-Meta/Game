@@ -1,5 +1,7 @@
 package com.skreaper.game.util;
 
+import android.support.annotation.Nullable;
+
 import com.skreaper.game.Constants;
 import com.skreaper.game.ormlite.DatabaseAccessor;
 import com.skreaper.game.ormlite.entity.Stats;
@@ -7,52 +9,37 @@ import com.skreaper.game.ormlite.entity.Stats;
 import java.util.Random;
 
 public class RandomValues {
-    final String lexicon = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final static Random r = new Random();
     private static DatabaseAccessor databaseAccessor = Constants.databaseAccessor;
 
     public static String getName() {
-        StringBuilder builder = new StringBuilder();
-        while(builder.toString().length() == 0) {
-            int length = r.nextInt(5)+5;
-            for(int i = 0; i < length; i++) {
-                builder.append(lexicon.charAt(r.nextInt(lexicon.length())));
-            }
-        }
-        return builder.toString();
+        return "test";
     }
 
-    public static Stats getRandomEnemyStats(){
+    public static Stats getRandomEnemyStats(Integer level){
         int randomProfileNumber = r.nextInt(4 - 1) + 1;
-        return getStats(randomProfileNumber);
+        return getStats(randomProfileNumber, level);
     }
 
-    public static Stats getStats(int profileNumber){
+    @Nullable
+    public static Stats getStats(int profileNumber, Integer level){
         Stats profileTemplate;
         switch(profileNumber) {
             case 1:
-                profileTemplate = databaseAccessor.statsDM.find("statsProfileName", "enemy1StatsProfile");
-                return getCalculatedStats(profileTemplate);
+                profileTemplate = databaseAccessor.statsDM.find("statsProfileName", "Knight");
+                return getCalculatedEnemyStats(profileTemplate, level);
             case 2:
-                profileTemplate = databaseAccessor.statsDM.find("statsProfileName", "enemy2StatsProfile");
-                return getCalculatedStats(profileTemplate);
+                profileTemplate = databaseAccessor.statsDM.find("statsProfileName", "Ranger");
+                return getCalculatedEnemyStats(profileTemplate, level);
             case 3:
-                profileTemplate = databaseAccessor.statsDM.find("statsProfileName", "enemy3StatsProfile");
-                return getCalculatedStats(profileTemplate);
+                profileTemplate = databaseAccessor.statsDM.find("statsProfileName", "Mage");
+                return getCalculatedEnemyStats(profileTemplate, level);
         }
         return null;
     }
 
-    public static Stats getCalculatedStats(Stats stats){
-        Integer startHealth = stats.getHealth();
-        Integer startMana = stats.getMana();
-        Integer startAttackDamage = stats.getAttack();
-        Integer startDefense = stats.getDefense();
-
-        stats.setAttack(Math.round(stats.getAttack() * getRandomFloat()));
-        stats.setDefense(Math.round(stats.getDefense() * getRandomFloat()));
-        stats.setVitality(Math.round(stats.getVitality() * getRandomFloat()));
-        return stats;
+    public static Stats getCalculatedEnemyStats(Stats stats, Integer level){
+        return CalculateStats.calculateEnemyStats(stats, level);
     }
 
     public static float getRandomFloat(){

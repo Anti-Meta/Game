@@ -9,15 +9,15 @@ import com.skreaper.game.ormlite.entity.Stats;
 public class CalculateStats {
 
     public static Integer getPlayerDamage(Player player, Enemy enemy){
-        Integer result = player.getStats().getAttack() - enemy.getStats().getDefense();
-        if(result <= 0){
-            return 0;
-        }
-        return result;
+        return calculateStats(player.getStats(), enemy.getStats());
     }
 
     public static Integer getEnemyDamage(Player player, Enemy enemy){
-        Integer result = enemy.getStats().getAttack() - player.getStats().getDefense();
+        return calculateStats(enemy.getStats(), player.getStats());
+    }
+
+    private static Integer calculateStats(Stats stats1, Stats stats2){
+        Integer result = stats1.getAttack() - stats2.getDefense();
         if(result <= 0){
             return 0;
         }
@@ -28,7 +28,7 @@ public class CalculateStats {
         return health > 0;
     }
 
-    public static Stats calculateProfile(Stats stats){
+    public static Stats calculateEnemyStats(Stats stats, Integer level){
         Integer attack = stats.getAttack();
         Double attackSpeed = stats.getAttackSpeed();
         Integer agility = stats.getAgility();
@@ -49,85 +49,72 @@ public class CalculateStats {
         Integer vitality = stats.getVitality();
 
         if(vitality != 0){
-            stats = calculateVitalityStats(stats, health, defense);
+            stats = calculateVitalityStats(stats, health, defense, level);
         }
 
         if(strength != 0){
-            stats = calculateStrengthStats(stats, health, armor, lifeSteal);
+            stats = calculateStrengthStats(stats, health, defense, attack, level);
         }
         if(agility != 0) {
-            stats = calculateAgilityStats(stats, attackSpeed, speed);
+            stats = calculateAgilityStats(stats, health, defense, attack, level);
         }
         if(intellect != 0){
-            stats = calculateIntellectStats(stats, mana, manaRegen, spellPower);
+            stats = calculateIntellectStats(stats, attack, mana, level);
         }
 
         return stats;
     }
 
-    private static Stats calculateVitalityStats(Stats stats, Integer startHealth, Integer startDefense){
+    private static Stats calculateVitalityStats(Stats stats, Integer startHealth, Integer startDefense, Integer level){
         Integer vitality = stats.getVitality();
 
-        stats.setHealth(calculateStatValue(0.01, vitality, startHealth, stats.getHealth()));
-        stats.setDefense(calculateStatValue(0.01, vitality, startDefense, stats.getDefense()));
+        stats.setHealth(calculateStatValue(0.03, vitality, startHealth, stats.getHealth(), level));
+        stats.setDefense(calculateStatValue(0.01, vitality, startDefense, stats.getDefense(), level));
 
         return stats;
     }
 
-    private static Stats calculateStrengthStats(Stats stats, Integer startHealth, Integer startArmor, Double startLifeSteal){
+    private static Stats calculateStrengthStats(Stats stats, Integer startHealth, Integer startDefense, Integer startAttack, Integer level){
         Integer strength = stats.getStrength();
 
-        stats.setHealth(calculateStatValue(0.01, strength, startHealth, stats.getHealth()));
 
-        if(startArmor != 0){
-            stats.setArmor(calculateStatValue(0.03, strength, startArmor, stats.getArmor()));
-        }
+        stats.setHealth(calculateStatValue(0.01, strength, startHealth, stats.getHealth(), level));
+        stats.setDefense(calculateStatValue(0.03, strength, startDefense, stats.getDefense(), level));
+        stats.setAttack(calculateStatValue(0.01, strength, startAttack, stats.getAttack(), level));
 
-        if(startLifeSteal != 0.00){
-            stats.setLifeSteal(calculateStatValue(0.02, strength, startLifeSteal, stats.getLifeSteal()));
-        }
         return stats;
     }
 
-    private static Stats calculateAgilityStats(Stats stats, Double startASpeed, Double startSpeed){
+    private static Stats calculateAgilityStats(Stats stats, Integer startHealth, Integer startDefense, Integer startAttack, Integer level){
         Integer agility = stats.getAgility();
 
-        if(startASpeed != 0.00){
-            stats.setCrit(calculateStatValue(0.01, agility, startASpeed, stats.getAttackSpeed()));
-        }
+        stats.setHealth(calculateStatValue(0.01, agility, startHealth, stats.getHealth(), level));
+        stats.setDefense(calculateStatValue(0.01, agility, startDefense, stats.getDefense(), level));
+        stats.setAttack(calculateStatValue(0.03, agility, startAttack, stats.getAttack(), level));
 
-        if(startSpeed != 0.00){
-            stats.setCrit(calculateStatValue(0.01, agility, startSpeed, stats.getSpeed()));
-        }
         return stats;
     }
 
-    private static Stats calculateIntellectStats(Stats stats, Integer startMana, Integer startManaRegen, Integer startSpellPower){
+    private static Stats calculateIntellectStats(Stats stats, Integer startAttack, Integer startMana, Integer level){
         Integer intellect = stats.getIntellect();
 
-        stats.setMana(calculateStatValue(0.01, intellect, startMana, stats.getMana()));
+        stats.setAttack(calculateStatValue(0.01, intellect, startAttack, stats.getAttack(), level));
+        stats.setMana(calculateStatValue(0.03, intellect, startMana, stats.getMana(), level));
 
-        if(startManaRegen != 0){
-            stats.setManaRegen(calculateStatValue(0.02, intellect, startManaRegen, stats.getManaRegen()));
-        }
-
-        if(startSpellPower != 0.00){
-            stats.setSpellPower(calculateStatValue(0.05, intellect, startSpellPower, stats.getSpellPower()));
-        }
         return stats;
     }
 
     @NonNull
-    private static Integer calculateStatValue(Double increasement, Integer statLevel, Integer baseValue, Integer currentValue){
-        Double totalMultiplier = (1.00 + (increasement * statLevel));
-        Double totalNeededToAdd = (baseValue * totalMultiplier) - currentValue;
+    private static Integer calculateStatValue(Double increasement, Integer statLevel, Integer baseValue, Integer currentValue, Integer level){
+        Double totalMultiplier = (1.00 + ((increasement * statLevel) * level));
+        Double totalNeededToAdd = (baseValue * totalMultiplier) - baseValue;
         return totalNeededToAdd.intValue() + currentValue;
     }
 
     @NonNull
-    private static Double calculateStatValue(Double increasement, Integer statLevel, Double baseValue, Double currentValue){
-        Double totalMultiplier = (1.00 + (increasement * statLevel));
-        Double totalNeededToAdd = (baseValue * totalMultiplier) - currentValue;
+    private static Double calculateStatValue(Double increasement, Integer statLevel, Double baseValue, Double currentValue, Integer level){
+        Double totalMultiplier = (1.00 + ((increasement * statLevel) * level));
+        Double totalNeededToAdd = (baseValue * totalMultiplier) - baseValue;
         return totalNeededToAdd + currentValue;
     }
 }

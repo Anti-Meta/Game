@@ -26,29 +26,39 @@ public class Stats implements Identifiable {
     private Integer defense;
 
     //PRIME SUB-STATS
+
+    /**
+     * Health +++
+     * Mana ~
+     * Attack ~
+     * Defense +
+     */
     @DatabaseField
     private Integer vitality;
 
     /**
-     * Increase health  by 1.01 * LvL
-     * Increase armor   by 1.03 * LvL
-     * Increase lifeS   by 1.02 * LvL
+     * Health +
+     * Mana ~
+     * Attack ++
+     * Defense +++
      */
     @DatabaseField
     private Integer strength;
 
     /**
-     * Increase crit    by 1.02 * LvL
-     * Increase aSpeed  by 1.01 * LvL
-     * Increase speed   by 1.01 * LvL
+     * Health +
+     * Mana ~
+     * Attack +++
+     * Defense +
      */
     @DatabaseField
     private Integer agility;
 
     /**
-     * Increase mana    by 1.01 * LvL
-     * Increase manaRe  by 1.02 * LvL
-     * Increase sPower  by 1.05 * LvL
+     * Health ~
+     * Mana +++
+     * Attack +
+     * Defense ~
      */
     @DatabaseField
     private Integer intellect;

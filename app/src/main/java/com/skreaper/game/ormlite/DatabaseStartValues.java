@@ -31,7 +31,7 @@ public class DatabaseStartValues {
         //If empty create new one and insert in database
         if(databasePlayer == null) {
             Player user = new Player();
-            user.setLevel(Constants.START_LEVEL);
+            user.setLevel(Constants.CURRENT_LEVEL);
             user.setName("Darius");
             user.setSkillpoints(0);
             user.setTotalSkillpoints(0);
@@ -50,7 +50,7 @@ public class DatabaseStartValues {
         if(databaseStats == null){
             Stats stats = new Stats();
             stats.setStatsProfileName("playerStatsProfile");
-            stats.setAttack(10);
+            stats.setAttack(100);
             stats.setAttackSpeed(1.00);
             stats.setAgility(0);
             stats.setArmor(0);
@@ -92,7 +92,7 @@ public class DatabaseStartValues {
             stats.setBlock(0.02);
             stats.setCrit(0.00);
             stats.setCritDamage(0.00);
-            stats.setDefense(3);
+            stats.setDefense(5);
             stats.setDodge(0.00);
             stats.setHealth(50);
             stats.setIntellect(0);
@@ -126,7 +126,7 @@ public class DatabaseStartValues {
             stats.setBlock(0.02);
             stats.setCrit(0.00);
             stats.setCritDamage(0.00);
-            stats.setDefense(2);
+            stats.setDefense(3);
             stats.setDodge(0.00);
             stats.setHealth(50);
             stats.setIntellect(0);
@@ -160,7 +160,7 @@ public class DatabaseStartValues {
             stats.setBlock(0.02);
             stats.setCrit(0.00);
             stats.setCritDamage(0.00);
-            stats.setDefense(1);
+            stats.setDefense(2);
             stats.setDodge(0.00);
             stats.setHealth(50);
             stats.setIntellect(0);

@@ -13,7 +13,7 @@ import com.skreaper.game.ormlite.DatabaseAccessor;
 import com.skreaper.game.ormlite.entity.Enemy;
 import com.skreaper.game.ormlite.entity.Player;
 import com.skreaper.game.util.CalculateStats;
-import com.skreaper.game.util.RandomValues;
+import com.skreaper.game.util.EnemyUtil;
 
 public class StartActivity extends AppCompatActivity {
     private DatabaseAccessor databaseAccessor = Constants.databaseAccessor;
@@ -101,11 +101,7 @@ public class StartActivity extends AppCompatActivity {
         Enemy databaseEnemy = databaseAccessor.enemyDM.findFirst();
 
         if(databaseEnemy == null){
-            Enemy newEnemy = new Enemy();
-            newEnemy.setName(RandomValues.getName());
-            newEnemy.setStats(RandomValues.getRandomEnemyStats());
-            newEnemy.setLevel(1);
-            databaseAccessor.enemyDM.deleteAll();
+            Enemy newEnemy = EnemyUtil.getNewEnemy(Constants.CURRENT_LEVEL);
             databaseAccessor.enemyDM.save(newEnemy);
             return newEnemy;
         }
@@ -169,7 +165,7 @@ public class StartActivity extends AppCompatActivity {
         currentPlayer = databaseAccessor.playerDM.findFirst();
         databaseAccessor.statsDM.refresh(currentPlayer.getStats());
         currentPlayerName = currentPlayer.getName();
-        currentPlayerHealth = currentPlayer.getStats().getVitality();
+        currentPlayerHealth = currentPlayer.getStats().getHealth();
         currentPlayerAttack = currentPlayer.getStats().getAttack();
         currentPlayerDefense = currentPlayer.getStats().getDefense();
     }
@@ -177,7 +173,7 @@ public class StartActivity extends AppCompatActivity {
     private void getEnemyData(){
         currentEnemy = findEnemy();
         currentEnemyName = currentEnemy.getName();
-        currentEnemyHealth = currentEnemy.getStats().getVitality();
+        currentEnemyHealth = currentEnemy.getStats().getHealth();
         currentEnemyAttack = currentEnemy.getStats().getAttack();
         currentEnemyDefense = currentEnemy.getStats().getDefense();
     }
