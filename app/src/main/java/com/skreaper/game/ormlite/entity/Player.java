@@ -15,6 +15,9 @@ public class Player implements Identifiable {
     private String name;
 
     @DatabaseField
+    private Integer xp;
+
+    @DatabaseField
     private Integer level;
 
     @DatabaseField
@@ -29,7 +32,7 @@ public class Player implements Identifiable {
     @DatabaseField
     private Integer diamond;
 
-    @DatabaseField(foreign = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Stats stats;
 
     @Override
@@ -47,6 +50,14 @@ public class Player implements Identifiable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getXp() {
+        return xp;
+    }
+
+    public void setXp(Integer xp) {
+        this.xp = xp;
     }
 
     public Integer getLevel() {

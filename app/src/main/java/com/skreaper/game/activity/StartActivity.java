@@ -1,25 +1,22 @@
 package com.skreaper.game.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.skreaper.game.Constants;
 import com.skreaper.game.R;
-import com.skreaper.game.ormlite.DatabaseAdapter;
+import com.skreaper.game.ormlite.DatabaseAccessor;
 import com.skreaper.game.ormlite.entity.Enemy;
 import com.skreaper.game.ormlite.entity.Player;
 import com.skreaper.game.util.CalculateStats;
 import com.skreaper.game.util.RandomValues;
 
 public class StartActivity extends AppCompatActivity {
-    private DatabaseAdapter databaseAdapter;
-    private RandomValues randomValues;
-    private CalculateStats calculator;
+    private DatabaseAccessor databaseAccessor = Constants.databaseAccessor;
 
     private Enemy currentEnemy;
     private Player currentPlayer;
@@ -45,14 +42,13 @@ public class StartActivity extends AppCompatActivity {
     private TextView textViewEnemyAttack;
     private TextView textViewEnemyDefense;
 
+    public StartActivity() {
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
-        databaseAdapter = new DatabaseAdapter(this);
-        randomValues = new RandomValues(this);
-        calculator = new CalculateStats();
 
         getDataForScreen();
         getScreenTextFields();
@@ -77,20 +73,20 @@ public class StartActivity extends AppCompatActivity {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentEnemyHealth -= calculator.getPlayerDamage(currentPlayer, currentEnemy);
-                currentPlayerHealth -= calculator.getEnemyDamage(currentPlayer, currentEnemy);
-                if(calculator.checkIfAlive(currentEnemyHealth)) {
+                currentEnemyHealth -= CalculateStats.getPlayerDamage(currentPlayer, currentEnemy);
+                currentPlayerHealth -= CalculateStats.getEnemyDamage(currentPlayer, currentEnemy);
+                if(CalculateStats.checkIfAlive(currentEnemyHealth)) {
                     updateEnemyHealthOnScreen();
                 }
                 else {
-                    databaseAdapter.enemyDM.delete(currentEnemy);
+                    databaseAccessor.enemyDM.delete(currentEnemy);
                     getEnemyData();
                     updateEnemyDataOnScreen();
                     Log.d("StartActivity", "Found new Enemy");
                 }
 
                 //TODO for now set player health back to 100
-                if(calculator.checkIfAlive(currentPlayerHealth)){
+                if(CalculateStats.checkIfAlive(currentPlayerHealth)){
                     updatePlayerHealthOnScreen();
                 }
                 else {
@@ -102,14 +98,15 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private Enemy findEnemy(){
-        Enemy databaseEnemy = databaseAdapter.enemyDM.findFirst();
+        Enemy databaseEnemy = databaseAccessor.enemyDM.findFirst();
 
         if(databaseEnemy == null){
             Enemy newEnemy = new Enemy();
-            newEnemy.setName(randomValues.getName());
-            newEnemy.setStats(randomValues.getRandomEnemyStats());
+            newEnemy.setName(RandomValues.getName());
+            newEnemy.setStats(RandomValues.getRandomEnemyStats());
             newEnemy.setLevel(1);
-            databaseAdapter.enemyDM.save(newEnemy);
+            databaseAccessor.enemyDM.deleteAll();
+            databaseAccessor.enemyDM.save(newEnemy);
             return newEnemy;
         }
         else{
@@ -169,20 +166,19 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void getPlayerData(){
-        currentPlayer = databaseAdapter.playerDM.findFirst();
-        databaseAdapter.statsDM.refresh(currentPlayer.getStats());
+        currentPlayer = databaseAccessor.playerDM.findFirst();
+        databaseAccessor.statsDM.refresh(currentPlayer.getStats());
         currentPlayerName = currentPlayer.getName();
         currentPlayerHealth = currentPlayer.getStats().getVitality();
-        currentPlayerAttack = currentPlayer.getStats().getAttackDamage();
+        currentPlayerAttack = currentPlayer.getStats().getAttack();
         currentPlayerDefense = currentPlayer.getStats().getDefense();
     }
 
     private void getEnemyData(){
         currentEnemy = findEnemy();
-        databaseAdapter.statsDM.refresh(currentEnemy.getStats());
         currentEnemyName = currentEnemy.getName();
         currentEnemyHealth = currentEnemy.getStats().getVitality();
-        currentEnemyAttack = currentEnemy.getStats().getAttackDamage();
+        currentEnemyAttack = currentEnemy.getStats().getAttack();
         currentEnemyDefense = currentEnemy.getStats().getDefense();
     }
 }

@@ -10,7 +10,7 @@ import com.skreaper.game.ormlite.entity.NPC;
 import com.skreaper.game.ormlite.entity.Player;
 import com.skreaper.game.ormlite.entity.Stats;
 
-public class DatabaseAdapter {
+public class DatabaseAccessor {
     public DatabaseManager<Player> playerDM;
     public DatabaseManager<NPC> npcDM;
     public DatabaseManager<Enemy> enemyDM;
@@ -18,7 +18,7 @@ public class DatabaseAdapter {
     public DatabaseManager<Equipment> equipmentDM;
     public DatabaseManager<EquipmentType> equipmentTypeDM;
 
-    public DatabaseAdapter(Context context){
+    public DatabaseAccessor(Context context){
         playerDM = new DatabaseManager<>(context, Player.class);
         npcDM = new DatabaseManager<>(context, NPC.class);
         enemyDM = new DatabaseManager<>(context, Enemy.class);

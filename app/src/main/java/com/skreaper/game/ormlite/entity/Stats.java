@@ -14,22 +14,47 @@ public class Stats implements Identifiable {
 
     //PRIME STATS
     @DatabaseField
+    private Integer health;
+
+    @DatabaseField
+    private Integer mana;
+
+    @DatabaseField
+    private Integer attack;
+
+    @DatabaseField
+    private Integer defense;
+
+    //PRIME SUB-STATS
+    @DatabaseField
     private Integer vitality;
 
-    /*@DatabaseField
+    /**
+     * Increase health  by 1.01 * LvL
+     * Increase armor   by 1.03 * LvL
+     * Increase lifeS   by 1.02 * LvL
+     */
+    @DatabaseField
     private Integer strength;
 
+    /**
+     * Increase crit    by 1.02 * LvL
+     * Increase aSpeed  by 1.01 * LvL
+     * Increase speed   by 1.01 * LvL
+     */
     @DatabaseField
     private Integer agility;
 
+    /**
+     * Increase mana    by 1.01 * LvL
+     * Increase manaRe  by 1.02 * LvL
+     * Increase sPower  by 1.05 * LvL
+     */
     @DatabaseField
-    private Integer intellect;*/
+    private Integer intellect;
 
     //ATTACK STATS
     @DatabaseField
-    private Integer attackDamage;
-
-    /*@DatabaseField
     private Integer spellPower;
 
     @DatabaseField
@@ -39,33 +64,27 @@ public class Stats implements Identifiable {
     private Double crit;
 
     @DatabaseField
-    private Double critDamage;*/
+    private Double critDamage;
 
     //DEFENSE STATS
     @DatabaseField
-    private Integer defense;
-
-    /*@DatabaseField
     private Integer armor;
 
     @DatabaseField
     private Double dodge;
 
     @DatabaseField
-    private Double block;*/
+    private Double block;
 
     //SUB STATS
-    /*@DatabaseField
+    @DatabaseField
     private Double speed;
 
     @DatabaseField
     private Double lifeSteal;
 
     @DatabaseField
-    private Integer mana;
-
-    @DatabaseField
-    private Integer manaRegen;*/
+    private Integer manaRegen;
 
     @Override
     public int getId() {
@@ -84,20 +103,29 @@ public class Stats implements Identifiable {
         this.statsProfileName = statsProfileName;
     }
 
-    public Integer getVitality() {
-        return vitality;
+    public Integer getHealth() {
+        return health;
     }
 
-    public void setVitality(Integer vitality) {
-        this.vitality = vitality;
+    public void setHealth(Integer health) {
+        this.health = health;
     }
 
-    public Integer getAttackDamage() {
-        return attackDamage;
+    public Integer getMana() {
+        return mana;
     }
 
-    public void setAttackDamage(Integer attackDamage) {
-        this.attackDamage = attackDamage;
+    public void setMana(Integer mana) {
+        this.mana = mana;
+    }
+
+
+    public Integer getAttack() {
+        return attack;
+    }
+
+    public void setAttack(Integer attack) {
+        this.attack = attack;
     }
 
     public Integer getDefense() {
@@ -106,5 +134,117 @@ public class Stats implements Identifiable {
 
     public void setDefense(Integer defense) {
         this.defense = defense;
+    }
+
+    public Integer getVitality() {
+        return vitality;
+    }
+
+    public void setVitality(Integer vitality) {
+        this.vitality = vitality;
+    }
+
+    public Integer getStrength() {
+        return strength;
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+    }
+
+    public Integer getAgility() {
+        return agility;
+    }
+
+    public void setAgility(Integer agility) {
+        this.agility = agility;
+    }
+
+    public Integer getIntellect() {
+        return intellect;
+    }
+
+    public void setIntellect(Integer intellect) {
+        this.intellect = intellect;
+    }
+
+    public Integer getSpellPower() {
+        return spellPower;
+    }
+
+    public void setSpellPower(Integer spellPower) {
+        this.spellPower = spellPower;
+    }
+
+    public Double getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    public void setAttackSpeed(Double attackSpeed) {
+        this.attackSpeed = attackSpeed;
+    }
+
+    public Double getCrit() {
+        return crit;
+    }
+
+    public void setCrit(Double crit) {
+        this.crit = crit;
+    }
+
+    public Double getCritDamage() {
+        return critDamage;
+    }
+
+    public void setCritDamage(Double critDamage) {
+        this.critDamage = critDamage;
+    }
+
+    public Integer getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Integer armor) {
+        this.armor = armor;
+    }
+
+    public Double getDodge() {
+        return dodge;
+    }
+
+    public void setDodge(Double dodge) {
+        this.dodge = dodge;
+    }
+
+    public Double getBlock() {
+        return block;
+    }
+
+    public void setBlock(Double block) {
+        this.block = block;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
+    }
+
+    public Double getLifeSteal() {
+        return lifeSteal;
+    }
+
+    public void setLifeSteal(Double lifeSteal) {
+        this.lifeSteal = lifeSteal;
+    }
+
+    public Integer getManaRegen() {
+        return manaRegen;
+    }
+
+    public void setManaRegen(Integer manaRegen) {
+        this.manaRegen = manaRegen;
     }
 }

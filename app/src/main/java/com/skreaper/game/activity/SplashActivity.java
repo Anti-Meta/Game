@@ -5,9 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.skreaper.game.Constants;
-import com.skreaper.game.ormlite.DatabaseAdapter;
 import com.skreaper.game.ormlite.DatabaseHelper;
-import com.skreaper.game.ormlite.DatabaseManager;
 import com.skreaper.game.ormlite.DatabaseStartValues;
 import com.skreaper.game.ormlite.entity.Enemy;
 import com.skreaper.game.ormlite.entity.Equipment;
@@ -29,7 +27,8 @@ public class SplashActivity extends AppCompatActivity {
 
         //TODO add everything we need to load here before we show the main menu
         DatabaseHelper.setClasses(createDatabaseClassesList());
-        new DatabaseStartValues(this);
+        new Constants(getApplicationContext());
+        new DatabaseStartValues();
 
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);

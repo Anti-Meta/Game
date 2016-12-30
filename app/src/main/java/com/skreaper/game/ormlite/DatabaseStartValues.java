@@ -1,18 +1,14 @@
 package com.skreaper.game.ormlite;
 
-import android.content.Context;
-
 import com.skreaper.game.Constants;
 import com.skreaper.game.ormlite.entity.Player;
 import com.skreaper.game.ormlite.entity.Stats;
 
 public class DatabaseStartValues {
 
-    private DatabaseAdapter databaseAdapter;
+    private DatabaseAccessor databaseAccessor = Constants.databaseAccessor;
 
-    public DatabaseStartValues(Context context){
-        databaseAdapter = new DatabaseAdapter(context);
-
+    public DatabaseStartValues(){
         createDatabaseDataIfNeeded();
     }
 
@@ -30,7 +26,7 @@ public class DatabaseStartValues {
 
     private void insertPlayer(){
         //Find Database Stats
-        Player databasePlayer = databaseAdapter.playerDM.findFirst();
+        Player databasePlayer = databaseAccessor.playerDM.findFirst();
 
         //If empty create new one and insert in database
         if(databasePlayer == null) {
@@ -42,22 +38,37 @@ public class DatabaseStartValues {
             user.setGold(0);
             user.setDiamond(0);
             user.setStats(playerStatsProfile());
-            databaseAdapter.playerDM.save(user);
+            databaseAccessor.playerDM.save(user);
         }
     }
 
     private Stats playerStatsProfile(){
         //Find Database Stats
-        Stats databaseStats = databaseAdapter.statsDM.find("statsProfileName", "player");
+        Stats databaseStats = databaseAccessor.statsDM.find("statsProfileName", "player");
 
         //If empty create new one and insert in database
         if(databaseStats == null){
             Stats stats = new Stats();
             stats.setStatsProfileName("playerStatsProfile");
-            stats.setAttackDamage(10);
-            stats.setDefense(3);
-            stats.setVitality(100);
-            databaseAdapter.statsDM.save(stats);
+            stats.setAttack(10);
+            stats.setAttackSpeed(1.00);
+            stats.setAgility(0);
+            stats.setArmor(0);
+            stats.setBlock(0.00);
+            stats.setCrit(0.05);
+            stats.setCritDamage(1.02);
+            stats.setDefense(0);
+            stats.setDodge(0.00);
+            stats.setHealth(0);
+            stats.setIntellect(0);
+            stats.setLifeSteal(0.00);
+            stats.setMana(100);
+            stats.setManaRegen(2);
+            stats.setStrength(0);
+            stats.setSpeed(0.00);
+            stats.setSpellPower(5);
+            stats.setVitality(10);
+            databaseAccessor.statsDM.save(stats);
             return stats;
         }
         else{
@@ -68,16 +79,31 @@ public class DatabaseStartValues {
 
     private Stats enemyStatsProfile1(){
         //Find Database Stats
-        Stats databaseStats = databaseAdapter.statsDM.find("statsProfileName", "enemy1");
+        Stats databaseStats = databaseAccessor.statsDM.find("statsProfileName", "Knight");
 
         //If empty create new one and insert in database
         if(databaseStats == null) {
             Stats stats = new Stats();
-            stats.setStatsProfileName("enemy1StatsProfile");
-            stats.setAttackDamage(5);
+            stats.setStatsProfileName("Knight");
+            stats.setAttack(0);
+            stats.setAttackSpeed(0.00);
+            stats.setAgility(0);
+            stats.setArmor(15);
+            stats.setBlock(0.02);
+            stats.setCrit(0.00);
+            stats.setCritDamage(0.00);
             stats.setDefense(3);
-            stats.setVitality(50);
-            databaseAdapter.statsDM.save(stats);
+            stats.setDodge(0.00);
+            stats.setHealth(50);
+            stats.setIntellect(0);
+            stats.setLifeSteal(0.00);
+            stats.setMana(0);
+            stats.setManaRegen(0);
+            stats.setStrength(5);
+            stats.setSpeed(0.00);
+            stats.setSpellPower(0);
+            stats.setVitality(10);
+            databaseAccessor.statsDM.save(stats);
             return stats;
         }
         else{
@@ -87,16 +113,31 @@ public class DatabaseStartValues {
 
     private Stats enemyStatsProfile2(){
         //Find Database Stats
-        Stats databaseStats = databaseAdapter.statsDM.find("statsProfileName", "enemy2");
+        Stats databaseStats = databaseAccessor.statsDM.find("statsProfileName", "Ranger");
 
         //If empty create new one and insert in database
         if(databaseStats == null) {
             Stats stats = new Stats();
-            stats.setStatsProfileName("enemy2StatsProfile");
-            stats.setAttackDamage(10);
-            stats.setDefense(8);
-            stats.setVitality(30);
-            databaseAdapter.statsDM.save(stats);
+            stats.setStatsProfileName("Ranger");
+            stats.setAttack(0);
+            stats.setAttackSpeed(0.00);
+            stats.setAgility(5);
+            stats.setArmor(10);
+            stats.setBlock(0.02);
+            stats.setCrit(0.00);
+            stats.setCritDamage(0.00);
+            stats.setDefense(2);
+            stats.setDodge(0.00);
+            stats.setHealth(50);
+            stats.setIntellect(0);
+            stats.setLifeSteal(0.00);
+            stats.setMana(0);
+            stats.setManaRegen(0);
+            stats.setStrength(0);
+            stats.setSpeed(0.00);
+            stats.setSpellPower(0);
+            stats.setVitality(7);
+            databaseAccessor.statsDM.save(stats);
             return stats;
         }
         else{
@@ -106,16 +147,31 @@ public class DatabaseStartValues {
 
     private Stats enemyStatsProfile3(){
         //Find Database Stats
-        Stats databaseStats = databaseAdapter.statsDM.find("statsProfileName", "enemy3");
+        Stats databaseStats = databaseAccessor.statsDM.find("statsProfileName", "Mage");
 
         //If empty create new one and insert in database
         if(databaseStats == null) {
             Stats stats = new Stats();
-            stats.setStatsProfileName("enemy3StatsProfile");
-            stats.setAttackDamage(7);
-            stats.setDefense(5);
-            stats.setVitality(40);
-            databaseAdapter.statsDM.save(stats);
+            stats.setStatsProfileName("Mage");
+            stats.setAttack(0);
+            stats.setAttackSpeed(0.00);
+            stats.setAgility(5);
+            stats.setArmor(10);
+            stats.setBlock(0.02);
+            stats.setCrit(0.00);
+            stats.setCritDamage(0.00);
+            stats.setDefense(1);
+            stats.setDodge(0.00);
+            stats.setHealth(50);
+            stats.setIntellect(0);
+            stats.setLifeSteal(0.00);
+            stats.setMana(0);
+            stats.setManaRegen(0);
+            stats.setStrength(0);
+            stats.setSpeed(0.00);
+            stats.setSpellPower(0);
+            stats.setVitality(5);
+            databaseAccessor.statsDM.save(stats);
             return stats;
         }
         else{
@@ -125,16 +181,31 @@ public class DatabaseStartValues {
 
     private Stats bossStatsProfile(){
         //Find Database Stats
-        Stats databaseStats = databaseAdapter.statsDM.find("statsProfileName", "boss");
+        Stats databaseStats = databaseAccessor.statsDM.find("statsProfileName", "Boss");
 
         //If empty create new one and insert in database
         if(databaseStats == null) {
             Stats stats = new Stats();
-            stats.setStatsProfileName("bossStatsProfile");
-            stats.setAttackDamage(5);
-            stats.setDefense(25);
-            stats.setVitality(150);
-            databaseAdapter.statsDM.save(stats);
+            stats.setStatsProfileName("Boss");
+            stats.setAttack(0);
+            stats.setAttackSpeed(0.00);
+            stats.setAgility(5);
+            stats.setArmor(10);
+            stats.setBlock(0.05);
+            stats.setCrit(0.00);
+            stats.setCritDamage(0.00);
+            stats.setDefense(1);
+            stats.setDodge(0.00);
+            stats.setHealth(200);
+            stats.setIntellect(0);
+            stats.setLifeSteal(0.00);
+            stats.setMana(0);
+            stats.setManaRegen(0);
+            stats.setStrength(0);
+            stats.setSpeed(0.00);
+            stats.setSpellPower(0);
+            stats.setVitality(10);
+            databaseAccessor.statsDM.save(stats);
             return stats;
         }
         else{

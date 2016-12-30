@@ -15,7 +15,7 @@ public class Enemy implements Identifiable {
     @DatabaseField
     private int level;
 
-    @DatabaseField(foreign = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Stats stats;
 
     @Override

@@ -5,7 +5,9 @@ import android.content.Context;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.table.TableUtils;
 import com.skreaper.game.Constants;
+import com.skreaper.game.ormlite.entity.Enemy;
 import com.skreaper.game.ormlite.entity.Identifiable;
 
 import java.sql.SQLException;
@@ -162,6 +164,14 @@ public class DatabaseManager <T extends Identifiable> {
     public void saveMultiple(Collection<T> items){
         for (T item : items) {
             save(item);
+        }
+    }
+
+    public void deleteAll(){
+        try {
+            TableUtils.clearTable(dao.getConnectionSource(), Enemy.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

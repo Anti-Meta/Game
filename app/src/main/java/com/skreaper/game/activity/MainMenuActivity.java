@@ -3,31 +3,27 @@ package com.skreaper.game.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.skreaper.game.R;
 import com.skreaper.game.adapter.MainMenuAdapter;
 import com.skreaper.game.entity.MenuOption;
-import com.skreaper.game.ormlite.DatabaseAdapter;
-import com.skreaper.game.ormlite.DatabaseManager;
+import com.skreaper.game.ormlite.DatabaseAccessor;
 import com.skreaper.game.ormlite.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MainMenuActivity extends AppCompatActivity {
     private List<MenuOption> menuOptions = new ArrayList<>();
-    private DatabaseAdapter databaseAdapter;
+    private DatabaseAccessor databaseAccessor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        databaseAdapter = new DatabaseAdapter(this);
+        databaseAccessor = new DatabaseAccessor(this);
         loadMenuItems();
         setMenuItems();
 
@@ -39,7 +35,7 @@ public class MainMenuActivity extends AppCompatActivity {
         MainMenuAdapter mainMenuAdapter = new MainMenuAdapter(this, menuOptions);
         listView.setAdapter(mainMenuAdapter);
 
-        Player currentPlayer = databaseAdapter.playerDM.findFirst();
+        Player currentPlayer = databaseAccessor.playerDM.findFirst();
         textView.setText("Hello " + currentPlayer.getName());
     }
 
