@@ -4,7 +4,8 @@
 @sherkd hello ghuys im the Conciërge# Game
 
 TODO List:
-- [x] Create database entity's
+- [x] Create database entities
+- [ ] Create Stage system for enemies
 - [ ] Create XP system
 - [ ] Create skillpoint system
 - [ ] Create equipment system
