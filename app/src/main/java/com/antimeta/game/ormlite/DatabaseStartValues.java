@@ -3,6 +3,7 @@ package com.antimeta.game.ormlite;
 import com.antimeta.game.Constants;
 import com.antimeta.game.ormlite.entity.Player;
 import com.antimeta.game.ormlite.entity.Stats;
+import com.antimeta.game.util.StageUtil;
 
 public class DatabaseStartValues {
 
@@ -38,6 +39,7 @@ public class DatabaseStartValues {
             user.setGold(0);
             user.setDiamond(0);
             user.setStats(playerStatsProfile());
+            user.setCurrentStage(StageUtil.createNewLevelOneStage());
             databaseAccessor.playerDM.save(user);
         }
     }

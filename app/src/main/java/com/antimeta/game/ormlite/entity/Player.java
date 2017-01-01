@@ -33,6 +33,9 @@ public class Player implements Identifiable {
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Stats stats;
 
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+    private Stage currentStage;
+
     @Override
     public int getId() {
         return id;
@@ -104,5 +107,13 @@ public class Player implements Identifiable {
 
     public void setStats(Stats stats) {
         this.stats = stats;
+    }
+
+    public Stage getCurrentStage() {
+        return currentStage;
+    }
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
     }
 }

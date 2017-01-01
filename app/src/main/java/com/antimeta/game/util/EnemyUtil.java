@@ -7,8 +7,8 @@ import com.antimeta.game.ormlite.entity.Enemy;
  *         on 29-Dec-16.
  */
 public class EnemyUtil {
-
-    public static Enemy getNewEnemy(Integer currentLevel){
+    public static Enemy getNewEnemy(){
+        Integer currentLevel = PlayerUtil.getCurrentPlayerStage().getLevel();
         Enemy newEnemy = new Enemy();
         Float randomFloat = RandomValues.getRandomFloat();
         if(randomFloat >= 0.65f)

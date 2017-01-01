@@ -1,12 +1,14 @@
 package com.antimeta.game.ormlite;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 
 import com.antimeta.game.ormlite.entity.Enemy;
 import com.antimeta.game.ormlite.entity.Equipment;
 import com.antimeta.game.ormlite.entity.EquipmentType;
 import com.antimeta.game.ormlite.entity.NPC;
 import com.antimeta.game.ormlite.entity.Player;
+import com.antimeta.game.ormlite.entity.Stage;
 import com.antimeta.game.ormlite.entity.Stats;
 
 public class DatabaseAccessor {
@@ -16,6 +18,7 @@ public class DatabaseAccessor {
     public DatabaseManager<Stats> statsDM;
     public DatabaseManager<Equipment> equipmentDM;
     public DatabaseManager<EquipmentType> equipmentTypeDM;
+    public DatabaseManager<Stage> stageDM;
 
     public DatabaseAccessor(Context context){
         playerDM = new DatabaseManager<>(context, Player.class);
@@ -24,6 +27,7 @@ public class DatabaseAccessor {
         statsDM = new DatabaseManager<>(context, Stats.class);
         equipmentDM = new DatabaseManager<>(context, Equipment.class);
         equipmentTypeDM = new DatabaseManager<>(context, EquipmentType.class);
+        stageDM = new DatabaseManager<>(context, Stage.class);
     }
 
     //CUSTOM SQL BELOW!!

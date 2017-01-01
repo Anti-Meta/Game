@@ -101,7 +101,7 @@ public class StartActivity extends AppCompatActivity {
         Enemy databaseEnemy = databaseAccessor.enemyDM.findFirst();
 
         if(databaseEnemy == null){
-            Enemy newEnemy = EnemyUtil.getNewEnemy(Constants.CURRENT_LEVEL);
+            Enemy newEnemy = EnemyUtil.getNewEnemy();
             databaseAccessor.enemyDM.save(newEnemy);
             return newEnemy;
         }

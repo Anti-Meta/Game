@@ -16,6 +16,10 @@ public class RandomValues {
         return "test";
     }
 
+    public static String getStageName(){
+        return "stage test";
+    }
+
     public static Stats getRandomEnemyStats(Integer level){
         int randomProfileNumber = r.nextInt(4 - 1) + 1;
         return getStats(randomProfileNumber, level);
