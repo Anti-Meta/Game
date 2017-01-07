@@ -16,6 +16,9 @@ public class Player implements Identifiable {
     private Integer xp;
 
     @DatabaseField
+    private Integer totalXPNeeded;
+
+    @DatabaseField
     private Integer level;
 
     @DatabaseField
@@ -59,6 +62,14 @@ public class Player implements Identifiable {
 
     public void setXp(Integer xp) {
         this.xp = xp;
+    }
+
+    public Integer getTotalXPNeeded() {
+        return totalXPNeeded;
+    }
+
+    public void setTotalXPNeeded(Integer totalXPNeeded) {
+        this.totalXPNeeded = totalXPNeeded;
     }
 
     public Integer getLevel() {

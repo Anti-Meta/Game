@@ -34,6 +34,8 @@ public class DatabaseStartValues {
             Player user = new Player();
             user.setLevel(Constants.CURRENT_LEVEL);
             user.setName("Darius");
+            user.setXp(0);
+            user.setTotalXPNeeded(50);
             user.setSkillpoints(0);
             user.setTotalSkillpoints(0);
             user.setGold(0);

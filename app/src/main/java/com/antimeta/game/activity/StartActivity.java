@@ -14,6 +14,7 @@ import com.antimeta.game.ormlite.entity.Enemy;
 import com.antimeta.game.ormlite.entity.Player;
 import com.antimeta.game.util.CalculateStats;
 import com.antimeta.game.util.EnemyUtil;
+import com.antimeta.game.util.PlayerUtil;
 
 public class StartActivity extends AppCompatActivity {
     private DatabaseAccessor databaseAccessor = Constants.databaseAccessor;
@@ -79,7 +80,7 @@ public class StartActivity extends AppCompatActivity {
                     updateEnemyHealthOnScreen();
                 }
                 else {
-                    databaseAccessor.enemyDM.delete(currentEnemy);
+                    PlayerUtil.processKilledEnemy(currentEnemy);
                     getEnemyData();
                     updateEnemyDataOnScreen();
                     Log.d("StartActivity", "Found new Enemy");

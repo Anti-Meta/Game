@@ -11,7 +11,7 @@ import com.antimeta.game.ormlite.entity.Stage;
 public class StageUtil {
     private static final DatabaseAccessor databaseAccessor = Constants.databaseAccessor;
 
-    public static Stage proceedKill(Stage currentStage){
+    public static Stage checkStageIfNewNeeded(Stage currentStage){
         Integer killsNeeded = currentStage.getKillsNeeded();
         if(killsNeeded != 0 && killsNeeded != 1){
             currentStage.setKillsNeeded(killsNeeded - 1);

@@ -7,6 +7,7 @@ import com.antimeta.game.ormlite.DatabaseAccessor;
 public class Constants {
     public final static String DATABASE_NAME = "database.db";
     public final static int DATABASE_CODE = 1;
+    public static int BEGIN_XP_TOTAL = 25;
     public static int CURRENT_LEVEL = 10;
 
     public static DatabaseAccessor databaseAccessor;
