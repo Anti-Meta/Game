@@ -6,7 +6,7 @@ import com.antimeta.game.ormlite.entity.Enemy;
 import com.antimeta.game.ormlite.entity.Player;
 import com.antimeta.game.ormlite.entity.Stats;
 
-public class CalculateStats {
+public class StatsUtil {
 
     public static Integer getPlayerDamage(Player player, Enemy enemy){
         return calculateStats(player.getStats(), enemy.getStats());
@@ -116,5 +116,44 @@ public class CalculateStats {
         Double totalMultiplier = (1.00 + ((increasement * statLevel) * level));
         Double totalNeededToAdd = (baseValue * totalMultiplier) - baseValue;
         return totalNeededToAdd + currentValue;
+    }
+
+    public static Stats getCalculatedEquipmentStats(Stats stats, String rarity){
+        Double increasement;
+        switch (rarity){
+            case "Legendary":
+                increasement = 0.10;
+                break;
+            case "Epic":
+                increasement = 0.05;
+                break;
+            case "Rare":
+                increasement = 0.02;
+                break;
+            case "Uncommon":
+                increasement = 0.01;
+                break;
+            case "Common":
+                increasement = 0.00;
+                break;
+            default:
+                increasement = 0.00;
+                break;
+        }
+        stats = calculateEquipmentStats(stats, increasement);
+        return stats;
+    }
+
+    private static Stats calculateEquipmentStats(Stats stats, Double increasement){
+        Integer vitality = stats.getVitality();
+        Integer strength = stats.getStrength();
+        Integer agility = stats.getAgility();
+        Integer intellect = stats.getIntellect();
+
+        stats.setVitality(calculateStatValue(increasement, 1, vitality, vitality, 1));
+        stats.setStrength(calculateStatValue(increasement, 1, strength, strength, 1));
+        stats.setAgility(calculateStatValue(increasement, 1, agility, agility, 1));
+        stats.setIntellect(calculateStatValue(increasement, 1, intellect, intellect, 1));
+        return stats;
     }
 }

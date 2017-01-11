@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.antimeta.game.Constants;
 import com.antimeta.game.ormlite.DatabaseAccessor;
+import com.antimeta.game.ormlite.entity.EquipmentType;
 import com.antimeta.game.ormlite.entity.Stats;
 
 import java.util.Random;
@@ -12,12 +13,96 @@ public class RandomValues {
     private final static Random r = new Random();
     private static DatabaseAccessor databaseAccessor = Constants.databaseAccessor;
 
-    public static String getName() {
+    public static String getName(String className) {
+        switch (className){
+            case "Knight":
+                return getRandomKnightName();
+            case "Ranger":
+                return getRandomRangerName();
+            case "Mage":
+                return getRandomMageName();
+        }
+        return "test";
+    }
+
+    public static String getRandomKnightName(){
+        int randomNumber = r.nextInt(4 - 1) + 1;
+        switch (randomNumber){
+            case 1:
+                return "Warrior";
+            case 2:
+                return "Paladin";
+            case 3:
+                return "Death Knight";
+            default:
+                return "Knight";
+        }
+    }
+
+    public static String getRandomMaterial(){
+        int randomNumber = r.nextInt(4 - 1) + 1;
+        switch (randomNumber){
+            case 1:
+                return "Plate";
+            case 2:
+                return "Leather";
+            case 3:
+                return "Cloth";
+        }
+        return null;
+    }
+
+    public static String getRandomRangerName(){
+        int randomNumber = r.nextInt(4 - 1) + 1;
+        switch (randomNumber){
+            case 1:
+                return "Archer";
+            case 2:
+                return "Gunner";
+            case 3:
+                return "Thrower";
+            default:
+                return "Ranger";
+        }
+    }
+    public static String getRandomMageName(){
+        int randomNumber = r.nextInt(4 - 1) + 1;
+        switch (randomNumber){
+            case 1:
+                return "Mage";
+            case 2:
+                return "Necromancer";
+            case 3:
+                return "Priest";
+            default:
+                return "Mage";
+        }
+    }
+
+    public static EquipmentType getRandomEquipmentType(){
+        int randomNumber = r.nextInt(6 - 1) + 1;
+        switch (randomNumber){
+            case 1:
+                return databaseAccessor.equipmentTypeDM.find("Name", "Helmet");
+            case 2:
+                return databaseAccessor.equipmentTypeDM.find("Name", "Chestplate");
+            case 3:
+                return databaseAccessor.equipmentTypeDM.find("Name", "Platelegs");
+            case 4:
+                return databaseAccessor.equipmentTypeDM.find("Name", "Weapon");
+            case 5:
+                return databaseAccessor.equipmentTypeDM.find("Name", "Ring");
+            default:
+                return databaseAccessor.equipmentTypeDM.find("Name", "Weapon");
+        }
+    }
+
+    public static String getRandomEquipmentName(){
         return "test";
     }
 
     public static String getStageName(){
-        return "stage test";
+        return "test";
     }
 
     public static Stats getRandomEnemyStats(Integer level){
@@ -43,7 +128,12 @@ public class RandomValues {
     }
 
     public static Stats getCalculatedEnemyStats(Stats stats, Integer level){
-        return CalculateStats.calculateEnemyStats(stats, level);
+        return StatsUtil.calculateEnemyStats(stats, level);
+    }
+
+    public static Integer getRandomInteger(Integer max){
+        Integer number = max + 1;
+        return r.nextInt(number - 1) + 1;
     }
 
     public static float getRandomFloat(){

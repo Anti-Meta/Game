@@ -21,7 +21,7 @@ public class Equipment implements Identifiable {
     @DatabaseField
     private Integer maxLevel;
 
-    @DatabaseField(foreign = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Stats stats;
 
     public int getId() {
@@ -48,19 +48,27 @@ public class Equipment implements Identifiable {
         this.equipmentType = equipmentType;
     }
 
-    public int getLevel() {
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
-    public int getMaxLevel() {
+    public Integer getMaxLevel() {
         return maxLevel;
     }
 
-    public void setMaxLevel(int maxLevel) {
+    public void setMaxLevel(Integer maxLevel) {
         this.maxLevel = maxLevel;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public void setStats(Stats stats) {
+        this.stats = stats;
     }
 }

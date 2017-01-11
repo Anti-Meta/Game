@@ -12,6 +12,7 @@ import com.antimeta.game.ormlite.entity.Equipment;
 import com.antimeta.game.ormlite.entity.EquipmentType;
 import com.antimeta.game.ormlite.entity.NPC;
 import com.antimeta.game.ormlite.entity.Player;
+import com.antimeta.game.ormlite.entity.Stage;
 import com.antimeta.game.ormlite.entity.Stats;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         classes.add(Stats.class);
         classes.add(NPC.class);
         classes.add(Enemy.class);
+        classes.add(Stage.class);
         return classes;
     }
 }

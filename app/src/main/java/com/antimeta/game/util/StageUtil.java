@@ -27,7 +27,8 @@ public class StageUtil {
         Stage stage = new Stage();
         stage.setName(RandomValues.getStageName());
         stage.setKillsNeeded(10);
-        stage.setLevel(oldLevel);
+        stage.setLevel(oldLevel + 1);
+        databaseAccessor.stageDM.save(stage);
         return stage;
     }
 
@@ -37,6 +38,7 @@ public class StageUtil {
         stage.setName(RandomValues.getStageName());
         stage.setKillsNeeded(10);
         stage.setLevel(1);
+        databaseAccessor.stageDM.save(stage);
         return stage;
     }
 }

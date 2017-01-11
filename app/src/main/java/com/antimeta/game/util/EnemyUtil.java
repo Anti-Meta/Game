@@ -20,7 +20,7 @@ public class EnemyUtil {
         }
         newEnemy.setLevel(currentLevel);
         newEnemy.setStats(RandomValues.getRandomEnemyStats(currentLevel));
-        newEnemy.setName(newEnemy.getStats().getStatsProfileName() + " " + currentLevel+ ": " +  RandomValues.getName());
+        newEnemy.setName(currentLevel+ ": " +  RandomValues.getName(newEnemy.getStats().getStatsProfileName()));
         return newEnemy;
     }
 }

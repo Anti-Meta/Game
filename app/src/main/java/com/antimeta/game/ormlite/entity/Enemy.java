@@ -15,6 +15,9 @@ public class Enemy implements Identifiable {
     @DatabaseField
     private int level;
 
+    @DatabaseField
+    private String rarety;
+
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Stats stats;
 
@@ -41,6 +44,14 @@ public class Enemy implements Identifiable {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getRarety() {
+        return rarety;
+    }
+
+    public void setRarety(String rarety) {
+        this.rarety = rarety;
     }
 
     public Stats getStats() {
